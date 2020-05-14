@@ -26,7 +26,7 @@ tables[0].cell(3, 3).text = '40702810900000002453'
 tables[0].cell(4, 0).text = 'ООО "Василек"'
 
 tables[1].cell(0, 0).text = 'Счет на оплату №11 от 13 мая 2020 г.'
-p = tables[1].rows[0].cells[0].text
+p = tables[1].rows[0].cells[0]
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 t_i = 'ООО "ВАСИЛЕК", ИНН 7722737753, КПП 772201001, 109052, '
@@ -50,6 +50,11 @@ tables[3].cell(3, 0).text = '3'
 tables[3].cell(3, 1).text = 'Тарификация услуг типа "Интернет".'
 tables[3].cell(3, 4).text = cost_i
 tables[3].cell(3, 5).text = cost_i
+
+a = float(cost_t[:-7]) + float(cost_s[:-7]) + float(cost_i[:-7])
+tables[4].cell(0,1).text = str(a)
+tables[4].cell(1,1).text = str((a)/5)
+tables[4].cell(2,1).text = str(a)
 
 
 #p = tables[0].rows[3].cells[0].text
