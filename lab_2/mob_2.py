@@ -6,7 +6,7 @@ data = subprocess.run(["nfdump", "-o", "fmt:%te|%sa|%da|%byt", "-r", "nfcapd.202
 file.write(data.stdout)
 file.close()
 file = open("file.txt", "r")
-outputfile = open("output.txt", "w")
+outputfile = open("output2.txt", "w")
 
 def parsing(file):
 	'''Представим нашу таблицу в виде словаря списков.'''

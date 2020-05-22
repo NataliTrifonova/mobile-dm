@@ -11,7 +11,6 @@ cost_s = cost_s[(cost_s.index(':') + 2):-1]
 file2.readline()
 cost_i = file2.readline()
 cost_i = cost_i[(cost_i.index(':') + 2):-1]
-print(cost_t, cost_s, cost_i)
 
 #Вставим данные в таблицы файла:
 doc = docx.Document('schet.docx')
@@ -26,16 +25,25 @@ tables[0].cell(3, 3).text = '40702810900000002453'
 tables[0].cell(4, 0).text = 'ООО "Василек"'
 
 tables[1].cell(0, 0).text = 'Счет на оплату №11 от 13 мая 2020 г.'
-p = tables[1].rows[0].cells[0]
-p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+run = tables[1].cell(0, 0).paragraphs[0].runs[0]
+run.font.bold = True
+run.font.size= Pt(10)
+run.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 t_i = 'ООО "ВАСИЛЕК", ИНН 7722737753, КПП 772201001, 109052, '
 t_i += 'г. Москва ул. Добрынинская, д. 70, корпус 2, тел: 12345'
-p = tables[2].cell(0, 1).text = t_i
-t_z = 'ООО "ЛАГУНА", ИНН 77147374567, КПП 772864077, 106752, '
+tables[2].cell(0, 1).text = t_i
+run = tables[2].cell(0, 1).paragraphs[0].runs[0]
+run.font.bold = True
+t_z = 'ООО "ЛАГУНА", ИНН 7714737457, КПП 772864077, 106752, '
 t_z += 'г. Москва ул. Тульская, д. 67, корпус 5, тел: 54321'
-p = tables[2].cell(1, 1).text = t_z
-p = tables[2].cell(2, 1).text = "№20022016 от 13.05.20"
+tables[2].cell(1, 1).text = t_z
+run = tables[2].cell(1, 1).paragraphs[0].runs[0]
+run.font.bold = True
+tables[2].cell(2, 1).text = "№20022016 от 13.05.20"
+run = tables[2].cell(2, 1).paragraphs[0].runs[0]
+run.font.bold = True
 
 tables[3].cell(1, 1).text = 'Тарификация услуг типа "Телефония".'
 tables[3].cell(1, 4).text = cost_t
@@ -46,17 +54,24 @@ tables[3].cell(2, 1).text = 'Тарификация услуг типа "СМС"
 tables[3].cell(2, 4).text = cost_s
 tables[3].cell(2, 5).text = cost_s
 tables[3].add_row()
-tables[3].cell(3, 0).text = '3'
+num = tables[3].cell(3, 0).text = '3'
 tables[3].cell(3, 1).text = 'Тарификация услуг типа "Интернет".'
 tables[3].cell(3, 4).text = cost_i
 tables[3].cell(3, 5).text = cost_i
 
 a = float(cost_t[:-7]) + float(cost_s[:-7]) + float(cost_i[:-7])
 tables[4].cell(0,1).text = str(a)
+run = tables[4].cell(0, 1).paragraphs[0].runs[0]
+run.font.bold = True
 tables[4].cell(1,1).text = str((a)/5)
+run = tables[4].cell(1, 1).paragraphs[0].runs[0]
+run.font.bold = True
 tables[4].cell(2,1).text = str(a)
+run = tables[4].cell(2, 1).paragraphs[0].runs[0]
+run.font.bold = True
 
-
+#tables[5].cell(0, 0).text = num + ', на сумму ' + str(a) + 'руб.'
+#tables[5].cell(1, 1).text = 'Т'
 #p = tables[0].rows[3].cells[0].text
 #print(p)
 
